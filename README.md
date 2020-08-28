@@ -22,7 +22,7 @@ A aplicação construída trata-se de um sistema de gerenciamento de receitas, o
 
 `npm install`
 
-6 - Execute o script create_table.sql para criar o banco de dados.
+6 - Execute o script `create_table.sql` para criar o banco de dados.
 
 5 - Inicie a aplicação
 
