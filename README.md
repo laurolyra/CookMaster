@@ -1,128 +1,122 @@
-# Projeto Cookmaster!
+# Project Name: Cookmaster
 
-Este projeto foi feito para avaliação de meus conhecimentos sobre _NodeJS_ no curso de _Software Development_ ofertado pela Trybe.
+This project was entirely created as a prerequisite to measure my _NodeJS_ skills on Trybe's _Software Development_ course.
 
-## O que foi desenvolvido:
+## What's been done here:
 
-Desenvolvi uma aplicação utilizando a arquitetura MVC (Model-View-Controller).
+I've made an recipe managing sistem using _NodeJS_, built upon an MVC (Model-View-Controller) architecture. I'ts possible to **C**reate, **R**ead, **U**pdate and **D**elete as many recipes as you want from a database in SQL.
 
-A aplicação construída trata-se de um sistema de gerenciamento de receitas, onde é possível criar, visualizar, deletar e atualizar produtos e vendas.
+## Installing
 
-## Instruções para execução
-
-1 - Clone este repositório
+1 - Clone this repo
 
 `git clone git@github.com:laurolyra/CookMaster.git`
 
-2 - Vá para a pasta do projeto
+2 - Go to the project's directory
 
 `cd CookMaster`
 
-3 - Instale as dependências
+3 - Install all the dependencies
 
 `npm install`
 
-6 - Execute o script `create_table.sql` para criar o banco de dados.
+6 - Execute script `create_table.sql` to create the database.
 
-5 - Inicie a aplicação
+5 - Start the application
 
 `node index.js`
 
-# Requisitos Obedecidos
+# Fulfilled Requirements
 
-Todos os requisitos abaixo constituem regras de negócio definidas pela escola, as quais não pude alterá-las para uma outra arquitetura ou uso de outra tecnologia.
+Every requirement down below reffers to business rules defined by Trybe, which I couldn't change to another pattern or use another technology.
 
-Todas as camadas da aplicação (Models, Views e Controllers) foram desenvolvidas a partir de um código inicial, contendo, inclusive, a lógica necessária para realizar login e logout de usuários, bem como um middleware utilizado em todas as rotas que precisem de autenticação.
+Models, Views and Controllers were developed from a template containing the code for user login and logout, as well as a middleware used in all route that needed some authorization.
 
-## Páginas
+## Pages
 
-### Funcionalidades de visualização
+### View Functionalities
 
-## 1 - Criação de uma tela de listagem de receitas
+## 1 - Main page
 
-A página é acessível através da rota principal (`/`).
+The page can be acessed through the main route (`/`).
 
-Para cada receita, é mostrado apenas o nome da receita e o nome da pessoa que cadastrou aquela receita, bem como um link para ver seus detalhes.
+For each recipe, it's shown only its name, its publisher's name, and a link guiding the user to read the how-to.
 
-Um botão "Nova receita" é exibido **apenas quando houver um usuário logado**.
+There is also an button written "Nova Receita" ("new recipe"), that is shown **only when there is a user logged in**.
 
-## 2 - Criação de uma tela para visualizar uma receita específica
+## 2 - Recipes page
 
-A tela está disponível no endpoint `/recipes/:id`
+This screen is accessible through the endpoint `/recipes/:id` and shows a recipe's name, ingredients and preparation.
 
-Caso o ID da pessoa logada na aplicação seja o mesmo ID da pessoa que criou a receita, um botão "Editar receita" e um outro "Excluir receita" são exibidos na página. Esses botões levam a pessoa para as páginas e editar e de excluir receita, respectivamente. Caso não haja nenhuma pessoa logada, nenhum desses botões é exibido.
+If the logged user's ID is the same from the one who created the recipe, two buttons will be shown: one named "Editar receita" ("edit recipe") and other named "Excluir receita" ("delete recipe"). These two buttons bring the user to the page "edit recipe" and "delete recipe", respectively.
 
-Esta página exibe o título, os ingredientes, e a forma de preparo da receita.
+These buttons won't appear if there isn't a logged user.
 
-## 3 - Criação de uma página de cadastro de usuários
+## 3 - User register
 
-Um usuário precisa ter os campos ID, E-mail, Senha, Nome e Sobrenome. Todos os campos são obrigatórios. O ID é gerado automaticamente, não podendo ser preenchido pelo usuário no momento do cadastro.
+To register a user, it's necessary to fill every field on the register page - such as E-mail, Senha ("password"), Nome ("name") and Sobrenome("last name"). The ID is generated automatically.
 
-A validação dos campos acontece no backend, e uma mensagem é enviada ao frontend através de uma propriedade passada para o EJS, da mesma forma que acontece com a view `users/login`.
+All field validations are done in backend, and a message is sent to frontend through a property passed to EJS.
 
-## 4 - Criação de uma página de cadastro de receitas
+## 4 - Recipes creation page
 
-A página é acessível através do endpoint `/recipes/new`, e o formulário é enviado para o endpoint `POST /recipes`
+This page can be accessed on the endpoint `/recipes/new`.
 
-A receita deve ter os campos ID, Nome, Ingredientes, Modo de preparo e Autor. Sinta-se à vontade para modelar o banco da forma que achar melhor. O ID é gerado automaticamente, não devendo ser preenchido no formulário de cadastro de receita.
+Recipes' name, ingredients, preparation and author fields are required. Like user registration's page, recipes' ID are generated  automatically.
 
-O campo dos ingredientes pode ser um campo de texto aberto.
+## 5 - Recipes edition page
 
-## 5 - Criação de uma página de edição de receitas
+This page is accessible through the endpoint `/recipes/:id/edit` and its form is sent by POST to endpoint `POST /recipes/:id`.
 
-A página é acessível através do endpoint `/recipes/:id/edit`, e o formulário é enviado para o endpoint `POST /recipes/:id`.
+When loaded, this page already shows all the information about the recipe.
 
-Ao carregar, a página já contém as informações atuais daquela receita. Você pode utilizar o atributo `value` dos inputs no HTML para preencher esses campos.
+Only the user who posted the recipe is allowed to edit it.
 
-Apenas a pessoa que criou a receita tem permissão para edita-la. Para verificar isso, você pode utilizar a propriedade `id` localizada em `req.user` (que é criada pelo `authMiddleware`) e compará-la ao ID de quem criou a receita. Caso os IDs não sejam idênticos, a pessoa é redirecionada à página de visualizar receita utilizando o método `res.redirect` no controller.
+If the edition is successful, the user is redirected to the recipe page, which will show the updated information.
 
-Caso a edição aconteça com sucesso, a pessoa é redirecionada para a página de visualização daquela receita, já com os dados atualizados.
+Every field is validated in backend.
 
-A validação dos campos é realizada no backend.
+## 6 - Recipes deletion page
 
-## 6 - Criação de uma página de exclusão de uma receita
+This page is accessed through endpoint `/recipes/:id/delete`. It can only be accessed by a user who posted the recipe.
 
-A página é acessível através do endpoint `/recipes/:id/delete`, e só pode ser acessada pela pessoa que cadastrou a receita.
+To confirm the deletion, user must type his/her password. This form is sent to the endpoint `POST /recipes/:id/delete`, and it will delete the recipe only if typed password is correct. If not, the user will be redirected to deletion page, now showing the message "Senha incorreta. Por favor, tente novamente" ("wrong password. Please, try again")
 
-Ao acessar a página, um formulário é exibido, solicitando a senha da pessoa para confirmar a operação. Esse formulário é enviado para o endpoint `POST /recipes/:id/delete`.
+If typed password is correct, the user will be redirected to the main page.
 
-A receita só é excluída caso a senha esteja correta. Caso ela esteja incorreta, a pessoa é redirecionada à página de exclusão da receita com a mensagem "Senha incorreta. Por favor, tente novamente".
+## 7 - Recipes research page
 
-Caso a receita seja excluída com sucesso, a pessoa é redirecionada à página de listagem de receitas.
+The webpage is available through the endpoint `/recipes/search`.
 
-## 7 - Cria uma página de pesquisa de receitas
+A text input is displayed along with a "search" button. the inmput content is sent to the endpoint `GET /recipes/search` through the parameter `q` in the query string.
 
-A página está acessível através do endpoint `/recipes/search`.
+At the backend, the text input value is available through the "q" property of the `req.query` object. If no data is informed for the search, the view is rendered only with the search field. if a value is informed, a similar list to the recipe list screen is displayed, containing title, name of person who signed in and a link foir each recipe.
 
-Um input do tipo texto é exibido juntamente com um botão "Pesquisar". O conteúdo do input é enviado para o endpoint `GET /recipes/search` através do parâmetro `q` na query string.
+To perform the search, the recipe controller requests that the model search for recipes **containing in its name** the typed value in the search input.
 
-No backend, o valor do input de texto estará acessível através da propriedade `q` do objeto `req.query`. Caso nada seja informado para pesquisa, a view é renderizada apenas com o campo de pesquisa. Caso um valor seja informado, uma lista semelhante à tela de listar receitas é exibida, contendo o título, nome da pessoa que cadastrou, e um link para cada receita.
+## 8 - Creating the "My Recipes" page
 
-Para realizar a pesquisa, o controller de receitas solicita ao model que pesquise por receitas **contendo, em seu nome,** o valor digitado no input de pesquisa.
+The link to access this page is only available to logged users. 
 
-## 8 - Criação de uma página de "Minhas receitas"
+The page is available though the endpoint `/me/recipes` and renderes a list equal to the list displayed at the Recipe List page, populated with the recipes registered by the logged user.
 
-O link para acessar essa página só está visível para pessoas logadas.
+If the person who is not logged in accesses this page, they are redirected to the login page.
 
-A página está acessível através do endpoint `/me/recipes`, e renderiza uma lista igual à que é exibida na página de listar receitas, populada com as receitas cadastradas pelo usuário logado.
+## 9 - Creating a page for Editing User
 
-Caso uma pessoa que não está logada acesse essa página, ela é redirecionada para a tela de login.
+The link to access this page is only available to logged users.
+
+Each user can only edit their own profile. For such, the backend extracts the ID from the selected user from the property `req.user` and not from the request body. This is the ID sent to the model to perform the user update.
+
+This page is available through the endpoint `/me/edit`, and the form is sent to the endpoint `POST /me`.
+
+If the unlogged user tries to access the page, they are redirected to the login page. (The middleware `authMiddleware` implements this functionality, so don't forget to use it here). 
+
+The user ID cannot be edited. Neither at the screen, nor by Postman request.
 
 
-## 9 - Criação de uma página de editar usuário
+## 10 - Using "includes" from EJS to render pages navbar
 
-O link para acessar essa página só está visível para pessoas logadas.
+Part of the HTML will be duplicated in every page such as, for example, the navigation bar.
 
-Cada pessoa só pode editar o próprio perfil. Para isso, o backend extrai o ID do usuário a ser atualizado da propriedade `req.user`, e não do corpo da request. Esse é o ID enviado ao model para realizar a atualização do usuário.
-
-Esta página está acessível através do endpoint `/me/edit`, e o formulário é enviado para o endpoint `POST /me`.
-
-Caso uma pessoa não logada tente acessar a página, ela é redirecionada para o login. (O middleware `authMiddleware` já implementa essa funcionalidade, então não se esqueça de utilizá-lo aqui.)
-
-O ID da pessoa não pode ser editado. Nem através da tela, nem através de uma request realizada pelo Postman.
-
-## 10 - Utilização de `includes` do EJS para renderizar a navbar das páginas
-
-Parte do HTML ficará repetido em todas as páginas como, por exemplo, a barra de navegação.
-
-Para esses conteúdos repetitivos, foi utilizado `includes` do EJS.
+For such repeated content, `includes` from EJS was used.
