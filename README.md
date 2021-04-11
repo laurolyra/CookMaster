@@ -20,11 +20,13 @@ I've made an recipe managing sistem using _NodeJS_, built upon an MVC (Model-Vie
 
 `npm install`
 
-6 - Execute script `create_table.sql` to create the database.
+4 - Execute script `create_table.sql` to create the database.
 
 5 - Start the application
 
 `node index.js`
+
+6 - Open your browser and navigate to http://localhost:3000
 
 # Fulfilled Requirements
 
