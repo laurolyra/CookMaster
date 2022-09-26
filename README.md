@@ -4,7 +4,7 @@ This project was entirely created as a prerequisite to measure my _NodeJS_ skill
 
 ## What's been done here:
 
-I've made an recipe managing sistem using _NodeJS_, built upon an MVC (Model-View-Controller) architecture. I'ts possible to **C**reate, **R**ead, **U**pdate and **D**elete as many recipes as you want from a database in SQL.
+I've made an recipe managing sistem using _NodeJS_, built upon an MVC (Model-View-Controller) architecture. It's possible to **C**reate, **R**ead, **U**pdate and **D**elete as many recipes as you want from a database in SQL.
 
 ## Installing
 
